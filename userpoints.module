@@ -69,6 +69,9 @@ function userpoints_settings() {
   $output .= form_textfield (t('Points for voting on a node'), 'userpoints_nodevote',
     variable_get('userpoints_nodevote', '1'), 5, 5);
 
+  $output .= form_textfield (t('Points for referring a user'), 'userpoints_referral',
+    variable_get('userpoints_referral', '1'), 5, 5);
+
   $output .= form_textfield (t('Points for inviting a user'), 'userpoints_invite_invite',
     variable_get('userpoints_invite_invite', '1'), 5, 5);
 
@@ -360,7 +363,7 @@ function userpoints_paymentapi(&$txn, $op, $arg = '') {
 
     case 'on checkout':
       $gross = $txn->gross;
-      $points = ($gross / $multiplier);
+      $points = ($gross * $multiplier);
 
       if ($points < $min) {
         form_set_error('gross', t('Minimum points for purchase is %min', array('%min' => $min)));
@@ -375,7 +378,7 @@ function userpoints_paymentapi(&$txn, $op, $arg = '') {
 
     case 'payment page':
       $gross = $txn->gross;
-      $points = ($gross / $multiplier);
+      $points = ($gross * $multiplier);
 
       // Check the user's balance
       $balance = userpoints_get_current_points($uid);
