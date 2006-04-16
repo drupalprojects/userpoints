@@ -1,0 +1,77 @@
+# translation of userpoints-module.po to Nederlands
+# LANGUAGE translation of Drupal (userpoints.module)
+# Generated from file: userpoints.module,v 1.8 2005/07/17 16:48:40 kbahey
+# Copyright YEAR NAME <EMAIL@ADDRESS>.
+# Bèr Kessels <ber@webschuur.com>, 2006.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: userpoints-module\n"
+"POT-Creation-Date: 2005-07-28 13:51-0700\n"
+"PO-Revision-Date: 2006-04-13 22:07+0200\n"
+"Last-Translator: Bèr Kessels <ber@webschuur.com>\n"
+"Language-Team: Nederlands <nl@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"X-Generator: KBabel 1.10.2\n"
+
+#: userpoints.module:10;13
+msgid "Users earn points as they post nodes, comments, and vote on nodes"
+msgstr "Gebruikers verdienen punten stemmen op nodes, of als ze nodes of commentaren plaatsen."
+
+#: userpoints.module:26
+msgid "userpoints view"
+msgstr "gebruikerspunten overzicht"
+
+#: userpoints.module:41
+msgid "Points for posting an %node-name"
+msgstr "Punten voor het plaatsen van een %node-name"
+
+#: userpoints.module:57
+msgid "Points for each event"
+msgstr "Punten voor elke gebeurtenis"
+
+#: userpoints.module:79
+msgid "User Points"
+msgstr "Gebruikerspunten"
+
+#: userpoints.module:80
+msgid "Highest Users"
+msgstr "Hoogst genoteerde gebruikers"
+
+#: userpoints.module:95
+msgid "You have %p %c"
+msgstr "U heeft %p %c"
+
+#: userpoints.module:98
+msgid "Points are visible to logged in users only"
+msgstr "Punten zijn enkel zichtbaar voor ingelogde gebruikers"
+
+#: userpoints.module:111
+msgid "user"
+msgstr "gebruiker"
+
+#: userpoints.module:111
+msgid "points"
+msgstr "punten"
+
+#: userpoints.module:95
+msgid "point"
+msgid_plural "points"
+msgstr[0] "punt"
+msgstr[1] "punten"
+
+#: userpoints.module:34
+msgid "view userpoints"
+msgstr "bekijk gebruikerspunten"
+
+#: userpoints.module:34
+msgid "use userpoints"
+msgstr "gebruik gebruikerspunten"
+
+#: userpoints.module:0
+msgid "userpoints"
+msgstr "gebruikerspunten"
+
