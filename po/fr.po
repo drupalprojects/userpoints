@@ -6,162 +6,201 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Drupal - Userpoints modules\n"
 "POT-Creation-Date: 2005-10-31 20:37+0100\n"
-"PO-Revision-Date: 2005-11-04 14:38+0100\n"
-"Last-Translator: Erik de Zeeuw <erik@syllance.fr>\n"
+"PO-Revision-Date: 2006-10-17 12:33+0100\n"
+"Last-Translator: Thierry Guegan <thierry_guegan_dhaliwal@yahoo.ca>\n"
 "Language-Team: french <drupal@syllance.fr>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Poedit-Language: French\n"
 
-#: userpoints.module:10;13
+#: modules/userpoints/userpoints.module:26
+#: ;29
 msgid "Users earn points as they post nodes, comments, and vote on nodes"
 msgstr "Les utilisateurs gagnent des points en créant du contenu, des commentaires, ou en votant."
 
-#: userpoints.module:26
+#: modules/userpoints/userpoints.module:42
 msgid "users by points"
 msgstr "points utilisateurs"
 
-#: userpoints.module:33
-msgid "Reset all user points"
-msgstr "Réinitialiser les points utilisateurs"
+#: modules/userpoints/userpoints.module:49
+#, fuzzy
+msgid "reset points"
+msgstr "points utilisateurs"
 
-#: userpoints.module:47
-msgid "All user points have been reset"
+#: modules/userpoints/userpoints.module:63
+#, fuzzy
+msgid "Reset all user points. This is useful in certain situations such as monthly contests. Enter YES without quotes to reset"
+msgstr "Vous pouvez %s. Cela peut s'avérer utile dans certaines situations tels que les concours mensuels."
+
+#: modules/userpoints/userpoints.module:66
+msgid "NO"
+msgstr "NON"
+
+#: modules/userpoints/userpoints.module:76
+msgid "YES"
+msgstr "OUI"
+
+#: modules/userpoints/userpoints.module:78
+#, fuzzy
+msgid "All user points have been reset!"
 msgstr "Tous les points utilisateurs ont été réinitialisés."
 
-#: userpoints.module:59
-msgid "Points for posting an %node-name"
+#: modules/userpoints/userpoints.module:88
+msgid "Points for each event"
+msgstr "Points gagnés pour chaque évènement"
+
+#: modules/userpoints/userpoints.module:94
+#, fuzzy
+msgid "Points for posting a %node-name"
 msgstr "Création d'un(e) %node-name "
 
-#: userpoints.module:63
+#: modules/userpoints/userpoints.module:103
 msgid "Points for posting a comment"
 msgstr "Points gagnés par commentaire"
 
-#: userpoints.module:66
+#: modules/userpoints/userpoints.module:111
 msgid "Points for moderating a comment"
 msgstr "Points gagnés par modération de commentaire"
 
-#: userpoints.module:69
-msgid "Points for voting on a node"
+#: modules/userpoints/userpoints.module:120
+#, fuzzy
+msgid "Points for voting on a node (requires nodevote module)"
 msgstr "Points gagnés par vote"
 
-#: userpoints.module:72
-msgid "Points for inviting a user"
+#: modules/userpoints/userpoints.module:130
+msgid "Points for referring a user (requires the user_referral module)"
+msgstr "Points gagnés pour la recommandation d'un utilisateur (nécessite le module user_referral)"
+
+#: modules/userpoints/userpoints.module:140
+#, fuzzy
+msgid "Points for inviting a user (requires the invite module)"
 msgstr "Points gagnés pour l'invitation d'un utilisateur"
 
-#: userpoints.module:75
-msgid "Points when invited user registers"
+#: modules/userpoints/userpoints.module:150
+#, fuzzy
+msgid "Points when invited user registers (requires the invite module)"
 msgstr "Points gagnés lors de l'inscription d'un utilisateur invité"
 
-#: userpoints.module:78
-msgid "Points for each event"
-msgstr "Points gagnés"
-
-#: userpoints.module:80
-msgid "Use points as form of payment?"
-msgstr "Utiliser les points comme moyen de paiement ?"
-
-#: userpoints.module:81
-msgid "Disable"
-msgstr "Désactivé"
-
-#: userpoints.module:81
-msgid "Enable"
-msgstr "Activé"
-
-#: userpoints.module:83
-msgid "Points multiplier for buying"
-msgstr "Coéfficient à utiliser pour convertir les points en devises"
-
-#: userpoints.module:86
-msgid "Points to get on selling (for every dollar)"
-msgstr "Points gagnés lors des ventes (par euro)"
-
-#: userpoints.module:89
-msgid "Minimum amount for purchase"
-msgstr "Montant d'achat minimum"
-
-#: userpoints.module:92
+#: modules/userpoints/userpoints.module:163
 msgid "Ecommerce Options"
 msgstr "Paramètres E-Commerce"
 
-#: userpoints.module:94
-msgid "You can %s. This is useful in certain situations such as monthly contests."
-msgstr "Vous pouvez %s. Cela peut s'avérer utile dans certaines situations tels que les concours mensuels."
+#: modules/userpoints/userpoints.module:168
+msgid "Points awarded for buying (multiplied by price)"
+msgstr "Points gagnés pour achat (multiplié par le prix)"
 
-#: userpoints.module:97
+#: modules/userpoints/userpoints.module:176
+msgid "Smallest purchase for which points are awarded"
+msgstr "Plus petit achat récompensé par des points"
+
+#: modules/userpoints/userpoints.module:184
+#, fuzzy
+msgid "Accept user points as payment?"
+msgstr "Utiliser les points comme moyen de paiement ?"
+
+#: modules/userpoints/userpoints.module:186
+msgid "Disable"
+msgstr "Désactivé"
+
+#: modules/userpoints/userpoints.module:186
+msgid "Enable"
+msgstr "Activé"
+
+#: modules/userpoints/userpoints.module:191
+#, fuzzy
+msgid "Points used in payment (for every dollar)"
+msgstr "Points gagnés lors des ventes (par euro)"
+
+#: modules/userpoints/userpoints.module:199
+msgid "Number of points that must be spent per purchase"
+msgstr "Nombre de points à dépenser par achat"
+
+#: modules/userpoints/userpoints.module:211
 msgid "Advanced Options"
 msgstr "Paramètres avançés"
 
-#: userpoints.module:112;112
+#: modules/userpoints/userpoints.module:215
+#, fuzzy
+msgid "Reset points"
+msgstr "Réinitialiser les points utilisateurs"
+
+#: modules/userpoints/userpoints.module:216
+msgid "Reset the points for all users."
+msgstr "Réinitialiser les points pour tous les utilisateurs"
+
+#: modules/userpoints/userpoints.module:230
+#, fuzzy
+msgid "User points"
+msgstr "Points Utilisateur"
+
+#: modules/userpoints/userpoints.module:233
+#: ;243;299
 msgid "Points"
 msgstr "Points"
 
-#: userpoints.module:119;176
-msgid "user"
-msgstr "utilisateur"
+#: modules/userpoints/userpoints.module:267
+#, fuzzy
+msgid "%user's points"
+msgstr "points utilisateurs"
 
-#: userpoints.module:119;176
-msgid "points"
-msgstr "points"
-
-#: userpoints.module:144;359
-msgid "User Points"
-msgstr "Points Utilisateur"
-
-#: userpoints.module:145
-msgid "Highest Users"
+#: modules/userpoints/userpoints.module:268
+#, fuzzy
+msgid "Highest users"
 msgstr "Utilisateurs ayant le plus de points"
 
-#: userpoints.module:160
+#: modules/userpoints/userpoints.module:283
 msgid "You have %p %c"
 msgstr "Vous avez %p %c"
 
-#: userpoints.module:163
+#: modules/userpoints/userpoints.module:286
 msgid "Points are visible to logged in users only"
 msgstr "Les points sont visibles uniquement par les utilisateurs connectés"
 
-#: userpoints.module:290
+#: modules/userpoints/userpoints.module:301
+#, fuzzy
+msgid "All users by points"
+msgstr "points utilisateurs"
+
+#: modules/userpoints/userpoints.module:414
 msgid "lost"
 msgstr "perdu"
 
-#: userpoints.module:293
+#: modules/userpoints/userpoints.module:417
 msgid "earned"
 msgstr "gagné"
 
-#: userpoints.module:298
+#: modules/userpoints/userpoints.module:422
 msgid "User %uname %op %points points! Total now is %total points."
 msgstr "%uname a %op %points points ! Le total est maintenant de %total points."
 
-#: userpoints.module:366
-msgid "Minimum points for purchase is %min"
-msgstr "Le nombre de points minimum est %min"
+#: modules/userpoints/userpoints.module:495
+msgid "User Points"
+msgstr "Points Utilisateur"
 
-#: userpoints.module:371
+#: modules/userpoints/userpoints.module:502
+msgid "You must spend at least %min points"
+msgstr "Vous devez dépenser au minimum %min points"
+
+#: modules/userpoints/userpoints.module:507
 msgid "You do not have enough points for this purchase"
 msgstr "Vous n'avez pas suffisament de points pour faire cette commande"
 
-#: userpoints.module:160
+#: modules/userpoints/userpoints.module:509
+msgid "This purchase will cost you %points points"
+msgstr "Cet achat vous coutera %points points"
+
+#: modules/userpoints/userpoints.module:550
+msgid "Your purchase using %points points has been completed"
+msgstr "Votre achat en utilisant %points points a été effectué"
+
+#: modules/userpoints/userpoints.module:283
 msgid "point"
 msgid_plural "points"
 msgstr[0] "point"
 msgstr[1] "points"
 
-#: userpoints.module:41
-msgid "view userpoints"
-msgstr "voir les points utilisateurs"
-
-#: userpoints.module:41
-msgid "use userpoints"
-msgstr "utiliser les points utilisateurs"
-
-#: userpoints.module:41
-msgid "admin userpoints"
-msgstr "gérer les points utilisateurs"
-
-#: userpoints.module:0
+#: modules/userpoints/userpoints.module:0
 msgid "userpoints"
 msgstr "points utilisateurs"
 
