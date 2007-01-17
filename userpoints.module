@@ -240,12 +240,13 @@ function userpoints_userpointsapi($op, $points = 0, $uid = 0, $event = NULL, $de
     }
   }
 
-  // Check the max points, and update if we are at the highest level ever
-  $max_points  = db_result(db_query('SELECT max_points FROM {userpoints} WHERE uid = %d', $uid));
   $current_points = (int)$points + (int)userpoints_get_current_points($uid);
 
-  if ($max_points < $current_points) {
-    $max_points = $current_points;
+  // Check if user has earned points
+  if ($points > 0) {
+    // Set the max_points to be the current max points, plus whatever earned in this transaction
+    $max_points = db_result(db_query('SELECT max_points FROM {userpoints} WHERE uid = %d', $uid));
+    $max_points = $current_points + (int)$max_points;
   }
 
   drupal_set_message(t('User %uname %op %pointsvalue %points! Total now is %total points.',
