@@ -23,6 +23,7 @@ function userpoints_install() {
           points        int(10) NOT NULL default '0',
           time_stamp    int(11) NOT NULL default '0',
           event         text,
+          description   text,
           status        int (1) NOT NULL default '0',
           PRIMARY KEY (txn_id)
         ) /*!40100 DEFAULT CHARACTER SET utf8 */;");
@@ -53,6 +54,18 @@ function userpoints_update_2() {
       $ret[] = update_sql("ALTER TABLE {userpoints} ADD max_points int(10) NOT NULL default '0' AFTER points");
       // Make the points column bigger
       $ret[] = update_sql("ALTER TABLE {userpoints} CHANGE points points int(10) NOT NULL default '0'");
+      break;
+  }
+  return $ret;
+}
+
+function userpoints_update_3() {
+  $ret = array();
+  switch ($GLOBALS['db_type']) {
+    case 'mysql':
+    case 'mysqli':
+      // Add the description column
+      $ret[] = update_sql("ALTER TABLE {userpoints_txn} ADD description text AFTER event");
       break;
   }
   return $ret;

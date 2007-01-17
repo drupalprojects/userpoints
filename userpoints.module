@@ -185,11 +185,12 @@ function userpoints_get_current_points($uid) {
  *      hook that fires after points have been added
  * @param points: number of points to add (if positive) or subtract (if negative)
  * @param uid: user id of the user to get or lose the points
- * @param event: optional description 
+ * @param event: optional event ID
+ * @param description: optional description 
  *
  * @return FALSE when no action is take, TRUE when points are credited or debited
  */
-function userpoints_userpointsapi($op, $points = 0, $uid = 0, $event = '') {
+function userpoints_userpointsapi($op, $points = 0, $uid = 0, $event = NULL, $description = NULL) {
   // anonymous users do not get points, and there have to be points to process
   if ($uid == 0 || $points == 0) {
     return FALSE;
@@ -224,7 +225,7 @@ function userpoints_userpointsapi($op, $points = 0, $uid = 0, $event = '') {
   }
 
   if ($op != 'txn approve') {
-    $moderation = userpoints_transaction($points, $uid, $event);
+    $moderation = userpoints_transaction($points, $uid, $event, $description);
     if ($moderation) {
       // Points are moderated, so we do nothing for now.  
       drupal_set_message(t('User %uname %op %pointsvalue %points, pending administrator approval.',
@@ -276,14 +277,15 @@ function userpoints_userpointsapi($op, $points = 0, $uid = 0, $event = '') {
   return TRUE;
 }
 
-function userpoints_transaction($points = 0, $uid = 0, $event = '') {
+function userpoints_transaction($points = 0, $uid = 0, $event = NULL, $description = NULL) {
   $moderation = variable_get(USERPOINTS_POINTS_MODERATION, FALSE);
   db_query("INSERT INTO {userpoints_txn}
-    VALUES (0, %d, 0, %d, %d, '%s', %d)",
+    VALUES (0, %d, 0, %d, %d, '%s', '%s', %d)",
     $uid,
     $points,
     time(),
     $event,
+    $description,
     $moderation);
   return $moderation;
 }
@@ -351,11 +353,14 @@ function userpoints_admin_approve() {
   if ($txn_id) {
     switch($op) {
       case 'approve':
-        $result = db_query("SELECT uid, event, points FROM {userpoints_txn} WHERE status = %d AND txn_id = %d", USERPOINTS_TXN_STATUS_PENDING, $txn_id);
+        $result = db_query("SELECT uid, event, points, description
+          FROM {userpoints_txn}
+          WHERE status = %d AND txn_id = %d",
+          USERPOINTS_TXN_STATUS_PENDING, $txn_id);
         $data = db_fetch_object($result);
         drupal_set_message(t('Transaction approved'));
         // This transaction has not been credited to the user's account, so credit it first
-        userpoints_userpointsapi('txn approve', $data->points, $data->uid, $data->event);
+        userpoints_userpointsapi('txn approve', $data->points, $data->uid, $data->event, $data->description);
         // Set it to approved
         db_query("UPDATE {userpoints_txn}
           SET status = %d, approver_uid = %d WHERE txn_id = %d",
@@ -398,7 +403,6 @@ function userpoints_admin_txn() {
     '#description'   => t('Drupal User ID for the user you want the points to affect'),
     );
   
-  
   $form['points'] = array(
     '#type'          => 'textfield',
     '#title'         => t('Points'),
@@ -417,6 +421,15 @@ function userpoints_admin_txn() {
     '#description'   => t('Date and time of this transaction, in the form YYYY-MM-DD HH:MM +ZZZZ'),
     );  
   
+  $form['description'] = array(
+    '#type'          => 'textarea',
+    '#title'         => t('Description'),
+    '#default_value' => $txn->description,
+    '#width'         => 70,
+    '#lines'         => 5,
+    '#description'   => t('Enter an optional description for this transaction, such as the reason it is created.'),
+    );  
+      
   switch($mode) {
     case 'add':
       $form['approver_uid'] = array(
@@ -496,17 +509,18 @@ function userpoints_admin_txn_submit($form_id, $form = NULL) {
   
   switch($mode) {
     case 'add':
-      userpoints_userpointsapi('points', $form['points'], $form['uid'], 'admin');
+      userpoints_userpointsapi('points', $form['points'], $form['uid'], 'admin', $form['description']);
       break;
       
     case 'edit':
       db_query("UPDATE {userpoints_txn} 
-        SET uid = %d, approver_uid = %d, points = %d, time_stamp = %d, event = '%s', status = %d WHERE txn_id = %d", 
+        SET uid = %d, approver_uid = %d, points = %d, time_stamp = %d, event = '%s', description = '%s', status = %d WHERE txn_id = %d", 
         $form['uid'],
         $form['approver_uid'],
         $form['points'],
         strtotime($form['time_stamp']),
         $form['event'],
+        $form['description'],
         $form['status'],
         $form['txn_id']);
       drupal_set_message(t('Transaction has been updated.'));
