@@ -405,7 +405,7 @@ function userpoints_admin_txn() {
     '#size'          => 10,
     '#maxlength'     => 7,
     '#default_value' => $txn->points,
-    '#description'   => t('Number of points to add/subtract from the user'),
+    '#description'   => t('Number of points to add/subtract from the user. For example, 25 (to add points) or -25 (to subtract points).'),
     );
   
   $form['time_stamp'] = array(
@@ -489,7 +489,6 @@ function userpoints_admin_txn() {
 
 function userpoints_admin_txn_submit($form_id, $form = NULL) {
   $mode = $form['mode'];
-  print_r($form);
 
   if ($form_id != 'userpoints_admin_txn') {
     return;
