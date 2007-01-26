@@ -321,12 +321,10 @@ function userpoints_admin_manage() {
     array('data' => t('Operation', userpoints_translation())),
   );
 
-  $sql_cnt = "SELECT COUNT(DISTINCT(txn_id)) FROM {userpoints_txn}";
-
   $sql = "SELECT t.txn_id, t.uid, t.time_stamp, t.points, t.event, t.status FROM {userpoints_txn} t WHERE t.status = %d";
 
   $sql .= tablesort_sql($header);
-  $result = pager_query($sql, USERPOINTS_PAGE_COUNT, 0, $sql_cnt, USERPOINTS_TXN_STATUS_PENDING);
+  $result = pager_query($sql, USERPOINTS_PAGE_COUNT, 0, NULL, USERPOINTS_TXN_STATUS_PENDING);
     while ($data = db_fetch_object($result)) {
       $user = user_load(array('uid'=>$data->uid));
       $rows[] = array(
