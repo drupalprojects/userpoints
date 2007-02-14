@@ -113,27 +113,29 @@ function userpoints_comment($comment, $op) {
   $points = variable_get(USERPOINTS_POST_COMMENT, 0);
   switch($op) {
     case 'insert':
-      userpoints_userpointsapi('points',$points, $user->uid, 'post comment');
+      userpoints_userpointsapi('points', $points, $user->uid, 'post comment');
       break;
     case 'delete':
       $points = -$points;
-      userpoints_userpointsapi('points',$points, $comment->uid, 'post comment');
+      userpoints_userpointsapi('points', $points, $comment->uid, 'post comment');
       break;
     case 'moderate':
       $points = variable_get(USERPOINTS_MODERATE_COMMENT, 0);
-      userpoints_userpointsapi('points',$points, $comment->uid, 'moderate comment');
+      userpoints_userpointsapi('points', $points, $comment->uid, 'moderate comment');
       break;
   }
 }
 
-function userpoints_invite($uid, $op) {
+function userpoints_invite($op, $args) {
   switch($op) {
     case 'invite':
       $points = variable_get(USERPOINTS_INVITE_INVITE, 0);
       break;
-    case 'register':
+    case 'escalate':
       $points = variable_get(USERPOINTS_INVITE_REGISTER, 0);
+      $op = 'register';
       break;
   }
-  userpoints_userpointsapi('points',$points, $uid,'invite'.$op);
+  userpoints_userpointsapi('points', $points, $args['inviter']->uid, 'invite '.$op);
 }
+
