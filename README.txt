@@ -99,7 +99,7 @@ callable and actionable by other modules.
 
 The functions are:
 
-userpoints_userpointsapi('points', $points, $uid, $event)
+userpoints_userpointsapi('points', $points, $uid, $event, $description)
   Use this function to award points to a user.
 
   The arguments are:
@@ -116,6 +116,10 @@ userpoints_userpointsapi('points', $points, $uid, $event)
   $event
     an identified of the event the points is being awarded for, this
     is a short word, and will be recorded in the transaction log.
+
+  $description
+    a description of the event. This is optional and is a more verbose
+    version of the event identifier.
 
 hook_userpoints($op, $points, $uid, $event) 
 
