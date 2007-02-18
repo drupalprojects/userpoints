@@ -131,6 +131,9 @@ function userpoints_invite($op, $args) {
     case 'invite':
       $points = variable_get(USERPOINTS_INVITE_INVITE, 0);
       break;
+    case 'cancel':
+      $points = -variable_get(USERPOINTS_INVITE_INVITE, 0);
+      break;
     case 'escalate':
       $points = variable_get(USERPOINTS_INVITE_REGISTER, 0);
       $op = 'register';
