@@ -58,7 +58,7 @@ function userpoints_help($section) {
 function userpoints_menu($may_cache) {
   $items = array();
 
-  if ($may_cache) {
+  if (!$may_cache) {
     $items[] = array(
       'path'     => 'userpoints',
       'callback' => 'userpoints_list_users',
@@ -393,13 +393,14 @@ function userpoints_admin_txn() {
       }
   }
 
-  $form['uid'] = array(
+  $form['txn_user'] = array(
     '#type'          => 'textfield',
-    '#title'         => t('User ID'),
-    '#size'          => 10,
-    '#maxlength'     => 7,
-    '#default_value' => $txn->uid,
-    '#description'   => t('Drupal User ID for the user you want the points to affect'),
+    '#title'         => t('User Name'),
+    '#size'          => 30,
+    '#maxlength'     => 60,
+    '#default_value' => $txn_user->name,
+    '#autocomplete_path' => 'user/autocomplete',
+    '#description'   => t('Drupal Username for the user you want the points to affect'),
     );
   
   $form['points'] = array(
@@ -453,9 +454,9 @@ function userpoints_admin_txn() {
       break;
       
    case 'edit':
-     $form['txn_id'] = array(
+     $form['txn_user'] = array(
        '#type'  => 'hidden',
-       '#value' => $txn->txn_id,
+       '#value' => $txn->txn_user,
        ); 
      
      $form['approver_uid'] = array(
@@ -505,10 +506,11 @@ function userpoints_admin_txn_submit($form_id, $form = NULL) {
   if ($form_id != 'userpoints_admin_txn') {
     return;
   }
+  $txn_user = user_load(array('name' => $form['txn_user']));
   
   switch($mode) {
     case 'add':
-      userpoints_userpointsapi('points', $form['points'], $form['uid'], 'admin', $form['description']);
+      userpoints_userpointsapi('points', $form['points'], $txn_user->uid, 'admin', $form['description']);
       break;
       
     case 'edit':
