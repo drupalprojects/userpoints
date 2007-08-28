@@ -22,6 +22,11 @@ define('USERPOINTS_TXN_STATUS_DECLINED',  2);
 
 define('USERPOINTS_PAGE_COUNT',           30);
 
+define('USERPOINTS_EXPIRY_DESCRIPTION', 'userpoints_expiry_description');
+define('USERPOINTS_EXPIREON_DATE', 'userpoints_expireon_date');
+define('USERPOINTS_EXPIREAFTER_DATE', 'userpoints_expireafter_date');
+
+
 /**
  * returns an array of common translation placeholders
  */
