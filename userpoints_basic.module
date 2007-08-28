@@ -108,14 +108,6 @@ function userpoints_comment($comment, $op) {
     case 'form':
       $orig_uid = $comment['uid']['#value'];
     case 'update':
-      if ($orig_uid != $comment['uid']['#value']) {
-        // Add to the new comment owner
-        userpoints_userpointsapi('points', $points, $comment['uid']['#value'], 'post comment');
-
-        // Subtract from the original comment owner
-        $points = -$points;
-        userpoints_userpointsapi('points', $points, $orig_uid, 'post comment');
-      }
       break;
   }
 }
