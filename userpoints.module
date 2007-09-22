@@ -311,21 +311,27 @@ function userpoints_get_current_points($uid = NULL) {
  */
 function userpoints_userpointsapi($params = array()) {
 
-  //Test for and set defaults
-  if (!$params['uid']) {
+  //Test for the existence of paramters and set defaults if necessary
+  if (is_numeric($params)) {
+    $points = $params;
+    $params = array();
+    $params['points'] = $points;
+    unset($points);
+  }
+  if (!isset($params['uid'])) {
     global $user;
     $params['uid'] = $user->uid;
   }
-  if (!$params['event']){
+  if (!isset($params['event'])){
     $params['event'] = NULL;
   }
-  if (!$params['description']) {
+  if (!isset($params['description'])) {
     $params['description'] = NULL;
   }
-  if (!$params['reference']) {
+  if (!isset($params['reference'])) {
     $params['reference'] = NULL;
   }
-  if (!$params['moderation']) {
+  if (!isset($params['moderation'])) {
     $params['moderation'] = variable_get(USERPOINTS_POINTS_MODERATION, FALSE);
   }
 
