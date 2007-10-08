@@ -135,7 +135,11 @@ function userpoints_update_6() {
       $ret[] = update_sql("ALTER TABLE {userpoints_txn} 
                          ADD expirydate INT(11) NOT NULL AFTER reference,
                          ADD expired TINYINT(1) NOT NULL AFTER expirydate,
-                         ADD parent_txn_id INT NOT NULL AFTER expired
+                         ADD parent_txn_id INT NOT NULL AFTER expired,
+                         ADD tid INT NULL AFTER parent_txn_id
+                          ");
+      $ret[] = update_sql("ALTER TABLE {userpoints}
+                          ADD tid INT NULL AFTER last_update
                           ");
       break;
   }
