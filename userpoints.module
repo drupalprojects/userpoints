@@ -229,7 +229,7 @@ function userpoints_admin_settings() {
     '#type' => 'fieldset',
     '#collapsible' => TRUE,
     '#collapsed' => TRUE,
-    '#title' => t('Points expiration'),
+    '#title' => t('!Points expiration', userpoints_translation()),
     '#description' =>t('These settings affect new points only, they are not retroactive!
                         Point expiration depends upon cron.
                       '),
@@ -347,7 +347,7 @@ function userpoints_admin_settings() {
       '#type' => 'fieldset',
       '#collapsible' => TRUE,
       '#collapsed' => TRUE,
-      '#title' => t('Points Categorization'),
+      '#title' => t('!Points Categorization', userpoints_translation()),
     );
     $form[$group]['tid'] = array(
       '#type' => 'select',
