@@ -1378,6 +1378,9 @@ function userpoints_get_default_tid() {
   variable_get(USERPOINTS_CATEGORY_DEFAULT_TID, NULL);
 }
 
+/*
+* Purpose: Allow my_userpoints to be themeable
+*/
 function theme_userpoints_my_userpoints($args, $header, $rows) {
   $pager_limit = variable_get(USERPOINTS_REPORT_LIMIT, 10);
   $output  = theme('table', $header, $rows);
