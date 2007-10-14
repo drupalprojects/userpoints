@@ -83,7 +83,7 @@ function userpoints_help($section) {
 function userpoints_menu($may_cache) {
   $items = array();
 
-  if (!$may_cache) {
+  if ($may_cache) {
     $items[] = array(
       'path'     => 'admin/settings/userpoints',
       'callback' => 'drupal_get_form',
@@ -597,7 +597,6 @@ function _userpoints_transaction(&$params) {
 * Update the caching table
 */
 function _userpoints_update_cache(&$params) {
-  drupal_set_message("Updating the cache!");
   if ( $params['status'] != 0 || $params['expired'] == 1) {
       //Only update the cache for fully approved non-expired points 
       return false;
