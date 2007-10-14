@@ -84,7 +84,7 @@ function userpoints_nodeapi(&$node, $op, $teaser, $page) {
       $orig_uid = $node->uid;
       break;
     case 'update':
-      if ($node->uid != $orig_uid) {
+      if ($node->uid != $orig_uid && is_numeric($orig_uid)) {
         // Add to the new node owner
         $params = array(
           'points' => $points,
