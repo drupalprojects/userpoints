@@ -69,6 +69,12 @@ function userpoints_install() {
 * Implementation of hook_uninstall().
 */
 function userpoints_uninstall() {
+
+  $vid = db_result(db_query("SELECT vid FROM {vocabulary} WHERE module='userpoints'"));
+  if ($vid) {
+    taxonomy_del_vocabulary($vid);
+  }
+
   db_query('DROP TABLE {userpoints}');
   db_query('DROP TABLE {userpoints_txn}');
   db_query("DELETE FROM {variable} WHERE name like '%userpoints%'");
