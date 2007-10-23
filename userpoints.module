@@ -522,6 +522,10 @@ function _userpoints_transaction(&$params) {
     if (!isset($params['uid'])) {
       global $user;
       $params['uid'] = $user->uid;
+      //there must be a UID, anonymous does not receive points
+      if (!$params['uid'] > 0) {
+        return false;
+      }
     }
     if (!isset($params['moderate'])) {
       //if not passed then site default is used
