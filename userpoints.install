@@ -35,7 +35,7 @@ function userpoints_install() {
           entity_type   varchar(32) default NULL, 
           operation         VARCHAR(32),
           PRIMARY KEY (txn_id),
-          KEY (event),
+          KEY (operation),
           KEY (reference),
           KEY (status)
         ) /*!40100 DEFAULT CHARACTER SET utf8 */;");
