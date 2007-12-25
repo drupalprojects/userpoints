@@ -1,6 +1,6 @@
 $Id$
 
-Copyright 2005 http://2bits.com
+Copyright 2005-2007 http://2bits.com
 
 Description
 -----------
