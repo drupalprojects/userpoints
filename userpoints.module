@@ -1250,7 +1250,7 @@ function userpoints_block($op = 'list', $delta = 0, $edit = array()) {
         if ($delta == -1) {
           $title = t('@user\'s !points', array_merge(array('@user' => $user->name), userpoints_translation()));;
           if ($user->uid) {
-            $points = (int) db_result(db_query('SELECT points FROM {userpoints} WHERE uid = %d', $user->uid));
+            $points = (int) db_result(db_query('SELECT points FROM {userpoints} WHERE uid = %d ORDER BY points DESC', $user->uid));
             $show_points = format_plural($points, t('!point', userpoints_translation()), t('!points', userpoints_translation()));
             $content = t('You have %p %c', array('%p' => $points, '%c' => $show_points));
           }
