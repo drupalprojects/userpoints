@@ -737,11 +737,13 @@ function userpoints_user($op, &$edit, &$account, $category = '') {
       if (user_access(USERPOINTS_PERM_ADMIN)) {
         $points = l($points, 'admin/user/userpoints/add/'. $account->uid, array('title' => t('Manage points')));
       }
-      $disp_points[] = array(
-        'title' => t('User !points', userpoints_translation()),
-        'value' => $points,
-        );
-      return array(t('!Points', userpoints_translation()) => $disp_points);
+      if (user_access(USERPOINTS_PERM_VIEW)) {
+        $disp_points[] = array(
+          'title' => t('User !points', userpoints_translation()),
+          'value' => $points,
+          );
+        return array(t('!Points', userpoints_translation()) => $disp_points);
+      }
       break;
   }
 }
