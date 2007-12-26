@@ -370,7 +370,8 @@ function userpoints_admin_settings() {
       '#options' =>  userpoints_get_categories(),
       '#description' => t('By default all points are assigned to this category. 
                            You can modify what categories are available by modifying
-                           the Userpoints taxonomy'),
+                           the <a href="!url">Userpoints taxonomy</a>', 
+                           array('!url' => url('admin/content/taxonomy/'. variable_get(USERPOINTS_CATEGORY_DEFAULT_VID, '')))),
     );
   }
 
