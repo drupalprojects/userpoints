@@ -528,8 +528,8 @@ function userpoints_userpointsapi($params) {
   $ret = _userpoints_transaction($params);
   if ($ret == false) {
     return array (
-      'status' = false,
-      'reason' = 'transaction failed in _userpoints_transaction, this is an internal module error',
+      'status' => false,
+      'reason' => 'transaction failed in _userpoints_transaction, this is an internal module error',
     );
   }
   
