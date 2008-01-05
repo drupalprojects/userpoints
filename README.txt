@@ -107,6 +107,10 @@ userpoints_userpointsapi()
   If a parameter is not set the site settings will used. Setting a parameter 
   to NULL will cause the entry to be NULL, defaults are only used if the 
   parameter is not set
+
+  Returns an array with a status (true/false) and a reason (string) if there
+  is an error. example
+  return array('status' => false, 'reasaon' => 'DB transaction failed');
   
   'uid'         => (int) User ID 
   'points'      => (int) # of points to award the user 
