@@ -398,6 +398,22 @@ function userpoints_get_current_points($uid = NULL, $tid = NULL) {
 }
 
 /**
+ * @param uid: user id of the user to get or lose the points
+ *
+ * @return number of max points in that user's account
+ */
+function userpoints_get_max_points($uid = NULL, $tid = NULL) {
+  if (!$uid) { 
+    global $user;
+    $uid = $user->uid;
+  }
+  if (!$tid) {
+    $tid = userpoints_get_default_tid();
+  }
+  return (int)db_result(db_query('SELECT max_points FROM {userpoints} WHERE uid = %d AND tid = %d', $uid, $tid));
+}
+
+/**
  * @param $params(array) or (int)
  *    if (int) assumed to be points for current user
  *    Accepts an array of keyed variables and parameters  
