@@ -84,6 +84,7 @@ function userpoints_help($section) {
  */
 function userpoints_menu($may_cache) {
   $items = array();
+  global $user;
 
   if ($may_cache) {
     $items[] = array(
@@ -162,9 +163,9 @@ function userpoints_menu($may_cache) {
     );
     $items[] = array(
       'path' => 'myuserpoints',
-      'title' => t('My') .' '. t('!Points', userpoints_translation()),
+      'title' => t('My') .' '. t('!points', userpoints_translation()),
       'callback' => 'userpoints_my_userpoints',
-      'access' => user_access(USERPOINTS_PERM_VIEW),
+      'access' => (user_access(USERPOINTS_PERM_VIEW) && $user->uid),
       'type' => MENU_NORMAL_ITEM
     );
   
