@@ -415,9 +415,36 @@ function userpoints_admin_manage() {
 }
 
 function userpoints_admin_approve() {
-  global $user;
-  $op = arg(3);
+  $operation = arg(3);
   $txn_id = (int)arg(4);
+  return drupal_get_form('userpoints_confirm_approve', $operation, $txn_id);
+}
+
+function userpoints_confirm_approve($operation, $txn_id) {
+  $form = array(
+    'operation' => array(
+      '#type' => 'value',
+      '#value' => $operation,
+    ),
+    'txn_id' => array(
+      '#type' => 'value',
+      '#value' => $txn_id,
+    ),
+  );
+
+  return confirm_form(
+    $form,
+    t('Are you sure you want to @op txn @txn_id', array('@op' => $operation, '@txn_id' => $txn_id)),
+    'admin/user/userpoints'
+    );  
+}
+       
+function userpoints_confirm_approve_submit($form_id, $form_values) {
+  global $user;
+
+  $op = $form_values['operation'];
+  $txn_id = $form_values['txn_id'];
+
   if ($txn_id) {
     switch ($op) {
       case 'approve':
@@ -448,7 +475,7 @@ function userpoints_admin_approve() {
   }
   drupal_goto('admin/user/userpoints');
 }
-
+ 
 function userpoints_admin_txn() {
   global $user;
 
