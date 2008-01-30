@@ -346,9 +346,44 @@ function userpoints_admin_manage() {
 }
 
 function userpoints_admin_approve() {
-  global $user;
   $op = arg(2);
   $txn_id = (int)arg(3);
+
+  $form = array(
+    'op' => array(
+      '#type' => 'value',
+      '#value' => $op,
+    ),
+    'txn_id' => array(
+      '#type' => 'value',
+      '#value' => $txn_id,
+    ),
+  );
+
+  switch($op) {
+    case 'approve':
+      $button = t('Approve');
+      break;
+    case 'decline':
+      $button = t('Decline');
+      break;
+  }
+  return confirm_form(
+    'userpoints_confirm_approve',
+ 	  $form,
+    t('Are you sure you want to @op txn @txn_id', array('@op' => $op, '@txn_id' => $txn_id)),
+    'admin/user/userpoints',
+ 	  t('This action cannot be undone.'),
+ 	  $button,
+ 	  t('Cancel'));
+}
+
+function userpoints_confirm_approve_submit($form_id, $form_values) {
+  global $user;
+
+  $op     = $form_values['op'];
+  $txn_id = $form_values['txn_id'];
+
   if ($txn_id) {
     switch($op) {
       case 'approve':
