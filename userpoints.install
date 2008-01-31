@@ -16,7 +16,7 @@ function userpoints_install() {
           PRIMARY KEY (uid),
           KEY (last_update)
         ) /*!40100 DEFAULT CHARACTER SET utf8 */;");
-     db_query("CREATE TABLE {userpoints_txn} (
+      db_query("CREATE TABLE {userpoints_txn} (
           txn_id        INT     NOT NULL AUTO_INCREMENT,
           uid           INT(10) NOT NULL DEFAULT '0',
           approver_uid  INT(10) NOT NULL DEFAULT '0',
@@ -57,8 +57,8 @@ function userpoints_install() {
 }
 
 /**
-* Implementation of hook_uninstall().
-*/
+ * Implementation of hook_uninstall().
+ */
 function userpoints_uninstall() {
   db_query('DROP TABLE {userpoints}');
   db_query('DROP TABLE {userpoints_txn}');

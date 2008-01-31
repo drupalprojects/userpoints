@@ -283,7 +283,7 @@ function userpoints_userpointsapi($op, $points = 0, $uid = 0, $event = NULL, $de
           '%op'     => $msg,
           '%pointsvalue' => abs($points),
           '%total'  => $current_points)
-           )));
+          )));
 
       return TRUE;
     }
@@ -402,9 +402,9 @@ function userpoints_admin_manage() {
         array('data' => $data->points, 'align' => 'right'),
         array('data' => $data->event),
         array('data' => l('approve', "admin/user/userpoints/approve/$data->txn_id") .
-                  ' '. l('decline', "admin/user/userpoints/decline/$data->txn_id") .
-                  ' '. l('edit',    "admin/user/userpoints/edit/$data->txn_id")
-             ),
+          ' '. l('decline', "admin/user/userpoints/decline/$data->txn_id") .
+          ' '. l('edit',    "admin/user/userpoints/edit/$data->txn_id")
+          ),
       );
     }
 
@@ -562,20 +562,20 @@ function userpoints_admin_txn() {
         );
       break;
 
-   case 'edit':
-     $form['txn_user'] = array(
-       '#type'  => 'hidden',
-       '#value' => $txn_user,
-       );
+    case 'edit':
+      $form['txn_user'] = array(
+        '#type'  => 'hidden',
+        '#value' => $txn_user,
+      );
 
-     $form['approver_uid'] = array(
-       '#type'  => 'textfield',
-       '#description' => t('Approver ID'),
-       '#default_value' => $txn->approver_uid,
-       '#size'          => 10,
-       '#maxlength'     => 7,
-       '#description'   => t('The user ID of the person who approved this transaction. 0 means not yet approved.'),
-       );
+      $form['approver_uid'] = array(
+        '#type'  => 'textfield',
+        '#description' => t('Approver ID'),
+        '#default_value' => $txn->approver_uid,
+        '#size'          => 10,
+        '#maxlength'     => 7,
+        '#description'   => t('The user ID of the person who approved this transaction. 0 means not yet approved.'),
+      );
 
       $form['event'] = array(
         '#type'  => 'textfield',

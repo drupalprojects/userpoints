@@ -165,8 +165,7 @@ function userpoints_views_views_default_views() {
   $view = new stdClass();
   $view->name = 'users_points';
   $view->description = 'Lists users by their points';
-  $view->access = array (
-  );
+  $view->access = array();
   $view->view_args_php = '';
   $view->page = TRUE;
   $view->page_title = 'Users by Points';
@@ -189,49 +188,45 @@ function userpoints_views_views_default_views() {
   $view->menu_tab_default_parent_type = 'tab';
   $view->menu_parent_tab_weight = '0';
   $view->menu_parent_title = '';
-  $view->sort = array (
-    array (
+  $view->sort = array(
+    array(
       'tablename' => 'userpoints',
       'field' => 'points',
       'sortorder' => 'ASC',
       'options' => '',
     ),
   );
-  $view->argument = array (
-  );
-  $view->field = array (
-    array (
+  $view->argument = array();
+  $view->field = array(
+    array(
       'tablename' => 'usernode_users',
       'field' => 'name',
       'label' => 'User',
       'handler' => 'usernode_views_handler_field_username_text',
       'sortable' => '1',
     ),
-    array (
+    array(
       'tablename' => 'userpoints',
       'field' => 'points',
       'label' => 'Points',
       'sortable' => '1',
     ),
-    array (
+    array(
       'tablename' => 'userpoints',
       'field' => 'max_points',
       'label' => 'Max. Points',
       'sortable' => '1',
     ),
   );
-  $view->filter = array (
-  );
-  $view->exposed_filter = array (
-  );
+  $view->filter = array();
+  $view->exposed_filter = array();
   $view->requires = array(userpoints, usernode_users);
   $views[$view->name] = $view;
 
   $view = new stdClass();
   $view->name = 'userpoints_txns';
   $view->description = 'Displays the userpoints transactions for a given user';
-  $view->access = array (
-  );
+  $view->access = array();
   $view->view_args_php = '';
   $view->page = TRUE;
   $view->page_title = 'Transactions';
@@ -245,10 +240,9 @@ function userpoints_views_views_default_views() {
   $view->url = 'views/users_transactions/$arg';
   $view->use_pager = TRUE;
   $view->nodes_per_page = '10';
-  $view->sort = array (
-  );
-  $view->argument = array (
-    array (
+  $view->sort = array();
+  $view->argument = array(
+    array(
       'type' => 'userpoints_uid',
       'argdefault' => '1',
       'title' => '',
@@ -257,20 +251,20 @@ function userpoints_views_views_default_views() {
       'wildcard_substitution' => '',
     ),
   );
-  $view->field = array (
-    array (
+  $view->field = array(
+    array(
       'tablename' => 'usernode_users',
       'field' => 'name',
       'label' => 'User',
       'handler' => 'usernode_views_handler_field_username_text',
     ),
-    array (
+    array(
       'tablename' => 'userpoints_txn',
       'field' => 'points',
       'label' => 'Points',
       'sortable' => '1',
     ),
-    array (
+    array(
       'tablename' => 'userpoints_txn',
       'field' => 'time_stamp',
       'label' => 'Time',
@@ -279,10 +273,8 @@ function userpoints_views_views_default_views() {
       'defaultsort' => 'DESC',
     ),
   );
-  $view->filter = array (
-  );
-  $view->exposed_filter = array (
-  );
+  $view->filter = array();
+  $view->exposed_filter = array();
   $view->requires = array(usernode_users, userpoints_txn);
   $views[$view->name] = $view;
 
