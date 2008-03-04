@@ -525,7 +525,7 @@ function userpoints_userpointsapi($params) {
   if ($params['points'] < 0) {
     $msg = t('lost');
   }
-  elseif ($params['status'] = 2) {
+  elseif ($params['status'] == 2) {
     //points have been declined 
     $msg = t('was declined');
   }
