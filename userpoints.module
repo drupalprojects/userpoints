@@ -406,6 +406,9 @@ function userpoints_get_max_points($uid = NULL, $tid = NULL) {
   if (!$tid) {
     $tid = userpoints_get_default_tid();
   }
+  elseif ($tid == 'all') {
+    return (int)db_result(db_query('SELECT SUM(max_points) FROM {userpoints} WHERE uid = %d,  $uid));
+  }
   return (int)db_result(db_query('SELECT max_points FROM {userpoints} WHERE uid = %d AND tid = %d', $uid, $tid));
 }
 
