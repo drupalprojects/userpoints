@@ -938,7 +938,7 @@ function userpoints_admin_txn() {
     '#maxlength'     => 60,
     '#default_value' => $txn_user->name,
     '#autocomplete_path' => 'user/autocomplete',
-    '#description'   => t('Drupal User Name for the user you want the points to affect'),
+    '#description'   => t('User Name for the user you want the points to affect'),
     );
 
   $form['points'] = array(
