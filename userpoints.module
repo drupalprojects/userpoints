@@ -1208,7 +1208,7 @@ function userpoints_admin_points() {
     $sql .= " AND p.points <> 0";
     $sql_cnt .= " AND points <> 0";
   }
-  $sql .= " GROUP BY p.uid, u.name, p.points";
+  $sql .= " GROUP BY p.uid, u.name, p.points, p.tid, t.name";
 
   $header = array(
     array('data' => t('User'), 'field' => 'u.name'),
@@ -1279,7 +1279,7 @@ function userpoints_list_users() {
     $sql .= " AND p.points <> 0";
     $sql_cnt .= " AND points <> 0";
   }
-  $sql .= " GROUP BY p.uid, u.name, p.points";
+  $sql .= " GROUP BY p.uid, u.name, p.points, p.tid, t.name";
   $header = theme('userpoints_list_users_header');
   $sql .= tablesort_sql($header);
   $pager_limit = variable_get(USERPOINTS_REPORT_USERCOUNT, 30);
