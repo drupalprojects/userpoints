@@ -1001,7 +1001,9 @@ function userpoints_admin_txn() {
     );  
 
   if ($txn->txn_id) {
-    $expirydate = format_date($txn->expirydate, 'custom', 'Y-m-d H:i O');
+    if ($txn->expirydate > 0) {
+      $expirydate = format_date($txn->expirydate, 'custom', 'Y-m-d H:i O');
+    }
   }
   else {
     //If we're not editing we use site defaults
