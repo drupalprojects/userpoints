@@ -1263,13 +1263,15 @@ function userpoints_list_users() {
           ";
 
   //Check for filtering
-  if ($tid == 0) {
-    $sql .= "WHERE p.tid = 0 ";
-    $cat = t('!Uncategorized', userpoints_translation()); 
-  }
-  elseif (is_numeric($tid)) {
-    $sql .= "WHERE p.tid = %d";
-    $cat = db_result(db_query("SELECT name from {term_data} WHERE tid = %d", $tid));
+  if (is_numeric($tid)) {
+    if ($tid > 0) {
+      $sql .= "WHERE p.tid = %d";
+      $cat = db_result(db_query("SELECT name from {term_data} WHERE tid = %d", $tid));
+    }
+    else {
+      $sql .= "WHERE p.tid = %d";
+      $cat = t('!Uncategorized', userpoints_translation()); 
+    }
   }
   else {
     $cat = t('All');
