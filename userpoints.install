@@ -104,10 +104,15 @@ function userpoints_update_2() {
     case 'mysql':
     case 'mysqli':
       // Add the max_points column
-      $ret[] = update_sql("ALTER TABLE {userpoints} ADD max_points INT(10) NOT NULL DEFAULT '0' AFTER points");
+      $ret[] = update_sql("ALTER TABLE {userpoints} ADD COLUMN max_points INT(10) NOT NULL DEFAULT '0' AFTER points");
       // Make the points column bigger
       $ret[] = update_sql("ALTER TABLE {userpoints} CHANGE points points INT(10) NOT NULL DEFAULT '0'");
       break;
+    case 'pgsql':
+      // Add the max_points column
+      $ret[] = update_sql("ALTER TABLE {userpoints} ADD COLUMN max_points INT(10) SET NOT NULL DEFAULT '0' AFTER points");
+      // Make the points column bigger
+      $ret[] = update_sql("ALTER TABLE {userpoints} ALTER COLUMN points TYPE INT(10) SET NOT NULL DEFAULT '0'");
   }
   return $ret;
 }
@@ -117,8 +122,9 @@ function userpoints_update_3() {
   switch ($GLOBALS['db_type']) {
     case 'mysql':
     case 'mysqli':
+    case 'pgsql':
       // Add the description column
-      $ret[] = update_sql("ALTER TABLE {userpoints_txn} ADD description TEXT AFTER event");
+      $ret[] = update_sql("ALTER TABLE {userpoints_txn} ADD COLUMN description TEXT AFTER event");
       break;
   }
   return $ret;
@@ -129,10 +135,15 @@ function userpoints_update_4() {
   switch ($GLOBALS['db_type']) {
     case 'mysql':
     case 'mysqli':
+    case 'pgsql':
       // Add the description column
       $ret[] = update_sql("ALTER TABLE {userpoints_txn} CHANGE event event VARCHAR(32)");
       $ret[] = update_sql("ALTER TABLE {userpoints_txn} CHANGE status status INTEGER NOT NULL DEFAULT '0' AFTER time_stamp");
       break;
+    case 'pgsql':
+      // Add the description column
+      $ret[] = update_sql("ALTER TABLE {userpoints_txn} ALTER COLUMN event TYPE VARCHAR(32)");
+      $ret[] = update_sql("ALTER TABLE {userpoints_txn} ALTER COLUMN status TYPE INTEGER SET NOT NULL DEFAULT '0' AFTER time_stamp");
   }
   return $ret;
 }
@@ -142,6 +153,7 @@ function userpoints_update_5() {
   switch ($GLOBALS['db_type']) {
     case 'mysql':
     case 'mysqli':
+    case 'pgsql':
       // Add the reference column and its index
       $ret[] = update_sql("ALTER TABLE {userpoints_txn} ADD COLUMN reference VARCHAR(128) AFTER description");
       $ret[] = update_sql("ALTER TABLE {userpoints_txn} ADD INDEX reference (reference )");
@@ -155,13 +167,14 @@ function userpoints_update_6() {
   switch ($GLOBALS['db_type']) {
     case 'mysql':
     case 'mysqli':
-      $ret[] = update_sql("ALTER TABLE {userpoints} ADD tid INT NULL AFTER last_update");
+    case 'pgsql':
+      $ret[] = update_sql("ALTER TABLE {userpoints} ADD COLUMN tid INT NULL AFTER last_update");
       $ret[] = update_sql("ALTER TABLE {userpoints} DROP PRIMARY KEY");
-      $ret[] = update_sql("ALTER TABLE {userpoints} ADD pid INT NOT NULL AUTO_INCREMENT PRIMARY KEY");
-      $ret[] = update_sql("ALTER TABLE {userpoints_txn} ADD expirydate INT(11) NOT NULL AFTER reference");
-      $ret[] = update_sql("ALTER TABLE {userpoints_txn} ADD expired TINYINT(1) NOT NULL AFTER expirydate");
-      $ret[] = update_sql("ALTER TABLE {userpoints_txn} ADD parent_txn_id INT NOT NULL AFTER expired");
-      $ret[] = update_sql("ALTER TABLE {userpoints_txn} ADD tid INT NULL AFTER parent_txn_id");
+      $ret[] = update_sql("ALTER TABLE {userpoints} ADD COLUMN pid INT NOT NULL AUTO_INCREMENT PRIMARY KEY");
+      $ret[] = update_sql("ALTER TABLE {userpoints_txn} ADD COLUMN expirydate INT(11) NOT NULL AFTER reference");
+      $ret[] = update_sql("ALTER TABLE {userpoints_txn} ADD COLUMN expired TINYINT(1) NOT NULL AFTER expirydate");
+      $ret[] = update_sql("ALTER TABLE {userpoints_txn} ADD COLUMN parent_txn_id INT NOT NULL AFTER expired");
+      $ret[] = update_sql("ALTER TABLE {userpoints_txn} ADD COLUMN tid INT NULL AFTER parent_txn_id");
       break;
   }
   return $ret;
@@ -171,9 +184,14 @@ function userpoints_update_7() {
   switch ($GLOBALS['db_type']) {
     case 'mysql':
     case 'mysqli':
-      $ret[] = update_sql("ALTER TABLE {userpoints_txn} ADD entity_id INT(11) NULL AFTER tid");
-      $ret[] = update_sql("ALTER TABLE {userpoints_txn} ADD entity_type VARCHAR(32) NULL AFTER entity_id");
+      $ret[] = update_sql("ALTER TABLE {userpoints_txn} ADD COLUMN entity_id INT(11) NULL AFTER tid");
+      $ret[] = update_sql("ALTER TABLE {userpoints_txn} ADD COLUMN entity_type VARCHAR(32) NULL AFTER entity_id");
       $ret[] = update_sql("ALTER TABLE {userpoints_txn} CHANGE event operation VARCHAR(32)");
+      break;
+    case 'pgsql':
+      $ret[] = update_sql("ALTER TABLE {userpoints_txn} ADD COLUMN entity_id INT(11) NULL AFTER tid");
+      $ret[] = update_sql("ALTER TABLE {userpoints_txn} ADD COLUMN entity_type VARCHAR(32) NULL AFTER entity_id");
+      $ret[] = update_sql("ALTER TABLE {userpoints_txn} RENAME event TO operation VARCHAR(32)");
       break;
   }
   return $ret;
@@ -185,6 +203,10 @@ function userpoints_update_8() {
     case 'mysqli':
       $ret[] = update_sql("ALTER TABLE {userpoints_txn} CHANGE tid tid INT(11) NOT NULL default '0'");
       $ret[] = update_sql("ALTER TABLE {userpoints} CHANGE tid tid INT(11) NOT NULL default '0'");
+      break;
+    case 'pgsql':
+      $ret[] = update_sql("ALTER TABLE {userpoints_txn} ALTER COLUMN tid TYPE INT(11) SET NOT NULL default '0'");
+      $ret[] = update_sql("ALTER TABLE {userpoints} ALTER COLUMN tid TYPE INT(11) SET NOT NULL default '0'");
       break;
   }
   return $ret;
