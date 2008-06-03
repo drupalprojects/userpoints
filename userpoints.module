@@ -3,18 +3,18 @@
 
 // Copyright 2005-2007 Khalid Baheyeldin http://2bits.com
 
-define('USERPOINTS_PERM_VIEW',           'view userpoints');
+define('USERPOINTS_PERM_VIEW',            'view userpoints');
 //The permission(PERM_USE) was removed from use as per #158490 it'll remain 
 //out until code exists to use the permission (jredding 12/26/2007)
-define('USERPOINTS_PERM_USE',            'use userpoints');
-define('USERPOINTS_PERM_ADMIN',          'admin userpoints');
+define('USERPOINTS_PERM_USE',             'use userpoints');
+define('USERPOINTS_PERM_ADMIN',           'admin userpoints');
 
-define('USERPOINTS_TRANS_UCPOINTS',      'userpoints_trans_ucpoints');
-define('USERPOINTS_TRANS_LCPOINTS',      'userpoints_trans_lcpoints');
-define('USERPOINTS_TRANS_LCPOINT',       'userpoints_trans_lcpoint');
-define('USERPOINTS_TRANS_UNCAT',         'userpoints_trans_uncat');
+define('USERPOINTS_TRANS_UCPOINTS',       'userpoints_trans_ucpoints');
+define('USERPOINTS_TRANS_LCPOINTS',       'userpoints_trans_lcpoints');
+define('USERPOINTS_TRANS_LCPOINT',        'userpoints_trans_lcpoint');
+define('USERPOINTS_TRANS_UNCAT',          'userpoints_trans_uncat');
 
-define('USERPOINTS_STATUS',              'userpoints_status');
+define('USERPOINTS_STATUS',               'userpoints_status');
 
 define('USERPOINTS_POINTS_MODERATION',    'userpoints_points_moderation');
 
@@ -23,19 +23,18 @@ define('USERPOINTS_TXN_STATUS_PENDING',   1);
 define('USERPOINTS_TXN_STATUS_DECLINED',  2);
 
 
-define('USERPOINTS_EXPIRY_DESCRIPTION', 'userpoints_expiry_description');
-define('USERPOINTS_EXPIREON_DATE', 'userpoints_expireon_date');
-define('USERPOINTS_EXPIREAFTER_DATE', 'userpoints_expireafter_date');
-define('USERPOINTS_DISPLAY_MESSAGE', 'userpoints_display_message');
+define('USERPOINTS_EXPIRY_DESCRIPTION',   'userpoints_expiry_description');
+define('USERPOINTS_EXPIREON_DATE',        'userpoints_expireon_date');
+define('USERPOINTS_EXPIREAFTER_DATE',     'userpoints_expireafter_date');
+define('USERPOINTS_DISPLAY_MESSAGE',      'userpoints_display_message');
 
-define('USERPOINTS_REPORT_USERCOUNT', 'userpoints_report_usercount');
-define('USERPOINTS_REPORT_LIMIT', 'userpoints_report_limit');
-define('USERPOINTS_REPORT_DISPLAYZERO', 'userpoints_report_displayzero');
+define('USERPOINTS_REPORT_USERCOUNT',     'userpoints_report_usercount');
+define('USERPOINTS_REPORT_LIMIT',         'userpoints_report_limit');
+define('USERPOINTS_REPORT_DISPLAYZERO',   'userpoints_report_displayzero');
 
-define('USERPOINTS_CATEGORY_NAME', 'Userpoints');
+define('USERPOINTS_CATEGORY_NAME',        'Userpoints');
 define('USERPOINTS_CATEGORY_DEFAULT_VID', 'userpoints_category_default_vid');
 define('USERPOINTS_CATEGORY_DEFAULT_TID', 'userpoints_category_default_tid');
-
 
 /**
  * Purpose: Returns an array of common translation placeholders
@@ -511,7 +510,7 @@ function userpoints_userpointsapi($params) {
   $account = user_load(array('uid' => $params['uid']));
   
   // Call the _userpoints hook, and stop if one of them returns FALSE
-  $rc = module_invoke_all('userpoints', 'points before', $params['points'], $account->uid, $params['event']);
+  $rc = module_invoke_all('userpoints', 'points before', $params['points'], $account->uid, $params['operation']);
 
   foreach ($rc as $key => $value) {
     if ($value == FALSE) {

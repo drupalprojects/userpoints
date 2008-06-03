@@ -19,7 +19,7 @@ function userpoints_basic_help($section) {
   return $output;
 }
 
-function userpoints_basic_userpoints($op, $points = 0, $uid = 0, $event = '') {
+function userpoints_basic_userpoints($op, $points = 0, $uid = 0, $operation = '') {
   switch ($op) {
     case 'setting':
       $group = 'basic';

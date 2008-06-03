@@ -60,10 +60,10 @@ function userpoints_service_service() {
           '#description' => t('An optional Term ID for the category.'),
         ), 
         array(
-          '#name'        => 'event',
+          '#name'        => 'operation',
           '#type'        => 'string',
           '#optional'    => TRUE,
-          '#description' => t('An optional event ID for this transaction.'),
+          '#description' => t('An optional operation ID for this transaction.'),
         ), 
         array(
           '#name'        => 'description',
@@ -96,7 +96,7 @@ function userpoints_service_get($uid, $tid = NULL) {
 /**
  * Logout user
  */
-function userpoints_service_points($uid, $points, $tid = NULL, $event = 'userpoints service', $description = NULL) {
+function userpoints_service_points($uid, $points, $tid = NULL, $operation = 'userpoints service', $description = NULL) {
   if (!$uid) {
     return services_error(t('User ID parameter is required.'));
   }
@@ -109,7 +109,7 @@ function userpoints_service_points($uid, $points, $tid = NULL, $event = 'userpoi
     'uid'         => $uid,
     'points'      => $points,
     'tid'         => $tid,
-    'event'       => $event,
+    'operation'   => $operation,
     'description' => $desc,
     'display'     => FALSE,
     'moderate'    => FALSE,

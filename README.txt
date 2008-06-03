@@ -120,7 +120,7 @@ userpoints_userpointsapi()
   'description' => (string) fulltext Description presented to the user
   'expirydate'  => (timestamp) timestamp the date/time when the points will
                                be expired (depends on cron)
-  'event'       => (string) varchar32 descriptive identifier administrative purposes
+  'operation'   => (string) varchar32 descriptive identifier administrative purposes
   'reference'   => (string) varchar32 indexed/searchable field on the DB
   'display'     => (boolean) Whether or not to display the "Points awarded"
                              message. If null, fall back to USERPOINTS_DISPLAY_MESSAGE
@@ -140,7 +140,7 @@ userpoints_userpointsapi()
 
   
 //---Hooks
-hook_userpoints($op, $points, $uid, $event) 
+hook_userpoints($op, $points, $uid, $operation) 
 
   Use this hook to act upon certain operations. When other modules award
   points to a user, your hook will be called, among others.
@@ -234,14 +234,14 @@ userpoints.points
     Number of points to add/subtract.
   int tid (optional)
     An optional Term ID for the category.
-  string event (optional)
-    An optional event ID for this transaction.
+  string operation (optional)
+    An optional operation ID for this transaction.
   string description (optional)
     An optional description of this transaction.
 
 Example:
 
-  $result = xmlrpc($server_url, 'userpoints.points', $key, $uid, $points, $tid, $event, $description);
+  $result = xmlrpc($server_url, 'userpoints.points', $key, $uid, $points, $tid, $operation, $description);
   // $result is an array
   // 'status'
   //   1 => Success
