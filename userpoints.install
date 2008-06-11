@@ -17,7 +17,7 @@ function userpoints_install() {
           tid           INT(11) NOT NULL default '0',
           PRIMARY KEY (pid),
           KEY (last_update),
-          KEY (tid)
+          KEY (uid, tid)
         ) /*!40100 DEFAULT CHARACTER SET utf8 */;");
       db_query("CREATE TABLE {userpoints_txn} (
           txn_id        INT        NOT NULL AUTO_INCREMENT,
@@ -52,7 +52,7 @@ function userpoints_install() {
           tid           INTEGER NOT NULL default '0',
 	        PRIMARY KEY (pid),
 	        KEY (last_update),
-          KEY (tid)
+          KEY (uid, tid)
         );");
       db_query("CREATE TABLE {userpoints_txn} (
           txn_id        SERIAL,
@@ -207,6 +207,19 @@ function userpoints_update_8() {
     case 'pgsql':
       $ret[] = update_sql("ALTER TABLE {userpoints_txn} ALTER COLUMN tid TYPE INT(11) SET NOT NULL default '0'");
       $ret[] = update_sql("ALTER TABLE {userpoints} ALTER COLUMN tid TYPE INT(11) SET NOT NULL default '0'");
+      break;
+  }
+  return $ret;
+}
+
+function userpoints_update_5009() {
+  $ret = array();
+  switch ($GLOBALS['db_type']) {
+    case 'mysql':
+    case 'mysqli':
+    case 'pgsql':
+      $ret[] = update_sql("ALTER TABLE {userpoints} DROP INDEX tid");
+      $ret[] = update_sql("ALTER TABLE {userpoints} ADD INDEX uid_tid (uid, tid)");
       break;
   }
   return $ret;
