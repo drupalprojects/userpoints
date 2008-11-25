@@ -547,16 +547,16 @@ function userpoints_userpointsapi($params) {
       array_merge(userpoints_translation(), array(
         '%uname'  => $account->name,
         '%op'     => $msg,
-        '%points' => format_plural(abs($params['points']), '1 !point', '@count !points')
+        '%points' => t(format_plural(abs($params['points']), '1 !point', '@count !points'), userpoints_translation())
         )));
   } 
   else {
-    $mesg = t('User %uname %op %points! Total now is %total.',
-      array_merge(userpoints_translation(), array(
-        '%uname'  => $account->name,
-        '%op'     => $msg,
-        '%points' => format_plural(abs($params['points']), '1 !point', '@count !points'),
-        '%total'  => format_plural(userpoints_get_current_points($params['uid'], $params['tid']), '1 !point', '@count !points'),
+    $mesg = t('User !uname !op !points Total now is !total.',
+      array_merge(array(
+        '!uname'  => $account->name,
+        '!op'     => $msg,
+        '!points' => t(format_plural(abs($params['points']), '1 !point', '@count !points'), userpoints_translation()),
+        '!total'  => t(format_plural(userpoints_get_current_points($params['uid'], $params['tid']), '1 !point', '@count !points'), userpoints_translation()),
       )));
   } //if $params['status']
 
